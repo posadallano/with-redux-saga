@@ -2,8 +2,6 @@ export const actionTypes = {
   FAILURE: 'FAILURE',
   LOAD_DATA: 'LOAD_DATA',
   LOAD_DATA_SUCCESS: 'LOAD_DATA_SUCCESS',
-  START_CLOCK: 'START_CLOCK',
-  TICK_CLOCK: 'TICK_CLOCK'
 }
 
 export function failure (error) {
@@ -21,17 +19,5 @@ export function loadDataSuccess (data) {
   return {
     type: actionTypes.LOAD_DATA_SUCCESS,
     data
-  }
-}
-
-export function startClock () {
-  return { type: actionTypes.START_CLOCK }
-}
-
-export function tickClock (isServer) {
-  return {
-    type: actionTypes.TICK_CLOCK,
-    light: !isServer,
-    ts: Date.now()
   }
 }

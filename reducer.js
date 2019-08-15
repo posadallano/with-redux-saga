@@ -22,12 +22,6 @@ function reducer (state = exampleInitialState, action) {
         ...{ placeholderData: action.data }
       }
 
-    case actionTypes.TICK_CLOCK:
-      return {
-        ...state,
-        ...{ lastUpdate: action.ts, light: !!action.light }
-      }
-
     default:
       return state
   }
