@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 
 import Clock from './clock'
+import PostItem from './post'
 
 function Page ({
   lastUpdate,
@@ -11,6 +12,7 @@ function Page ({
     <div>
       <h1>{title}</h1>
       <Clock lastUpdate={lastUpdate} light={light} />
+      <PostItem />
     </div>
   )
 }

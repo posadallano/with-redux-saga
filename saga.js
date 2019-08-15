@@ -9,7 +9,7 @@ import { actionTypes, failure, loadDataSuccess, tickClock } from './actions'
 es6promise.polyfill()
 
 
-function * runClockSaga () {
+function* runClockSaga() {
   yield take(actionTypes.START_CLOCK)
   while (true) {
     yield put(tickClock(false))
@@ -17,9 +17,9 @@ function * runClockSaga () {
   }
 }
 
-function* loadDataSaga () {
+export function* loadDataSaga() {
   try {
-    const res = yield fetch('https://jsonplaceholder.typicode.com/users')
+    const res = yield fetch('https://jsonplaceholder.typicode.com/posts')
     const data = yield res.json()
     yield put(loadDataSuccess(data))
   } catch (err) {
@@ -27,10 +27,12 @@ function* loadDataSaga () {
   }
 }
 
-function * rootSaga () {
-  yield all([
-    call(loadDataSaga)
-  ])
+function* actionWatcher() {
+  yield takeLatest(actionTypes.LOAD_DATA, loadDataSaga)
 }
 
-export default rootSaga
+export default function* rootSaga() {
+  yield all([
+    actionWatcher(),
+  ]);
+}
