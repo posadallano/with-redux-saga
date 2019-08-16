@@ -2,7 +2,8 @@ import { actionTypes } from './actions'
 
 export const exampleInitialState = {
   error: false,
-  placeholderData: null
+  placeholderData: null,
+  albumsData: null
 }
 
 function reducer (state = exampleInitialState, action) {
@@ -18,6 +19,12 @@ function reducer (state = exampleInitialState, action) {
         ...state,
         ...{ placeholderData: action.data }
       }
+
+      case actionTypes.LOAD_MORE_DATA_SUCCESS:
+        return {
+          ...state,
+          ...{ albumsData: action.data }
+        }  
 
     default:
       return state

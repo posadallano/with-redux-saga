@@ -1,14 +1,11 @@
 /* global fetch */
 
 import { all, put, takeLatest } from 'redux-saga/effects'
-import es6promise from 'es6-promise'
-import 'isomorphic-unfetch'
 
-import { actionTypes, failure, loadDataSuccess } from './actions'
+import { actionTypes, failure, loadDataSuccess, loadMoreDataSuccess } from './actions'
 
-es6promise.polyfill() 
 
-export function* loadDataSaga() {
+function* loadDataSaga() {
   try {
     const res = yield fetch('https://jsonplaceholder.typicode.com/posts')
     const data = yield res.json()
@@ -22,8 +19,23 @@ function* actionWatcher() {
   yield takeLatest(actionTypes.LOAD_DATA, loadDataSaga)
 }
 
+function* loadAlbums() {
+  try {
+    const res = yield fetch('https://jsonplaceholder.typicode.com/albums')
+    const data = yield res.json()
+    yield put(loadMoreDataSuccess(data))
+  } catch (err) {
+    yield put(failure(err))
+  }
+}
+
+function* actionWatcherAlbums() {
+  yield takeLatest(actionTypes.LOAD_MORE_DATA, loadAlbums)
+}
+
 export default function* rootSaga() {
   yield all([
     actionWatcher(),
+    actionWatcherAlbums()
   ]);
 }
