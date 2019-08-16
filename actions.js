@@ -33,6 +33,6 @@ export function loadMoreData () {
 export function loadMoreDataSuccess (data) {
   return {
     type: actionTypes.LOAD_MORE_DATA_SUCCESS,
-    data: data
+    dataalbum: data
   }
 }

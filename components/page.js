@@ -3,11 +3,15 @@ import { connect } from 'react-redux'
 import Button from './Button';
 import PostItem from './post'
 
-function Page ({title}) {
+function Page ({title}, props) {
+  const album = 'Press to see Albums';
+  const posts = 'Press to see Posts';
+  
   return (
     <div>
       <h1>{title}</h1>
-      <Button />
+      <Button text={album} dataComp='album' />
+      <Button text={posts} dataComp='post' />
       <PostItem />
     </div>
   )

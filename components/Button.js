@@ -1,16 +1,20 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { loadMoreData, loadData } from '../actions';
 
-let Button = ({dispatch}) => {
-   
+let Button = ({dispatch, text, dataComp}) => {   
    const handleLoadData = () => {
-      dispatch(loadMoreData())
+      if (dataComp === 'album') {
+         dispatch(loadMoreData())
+      }
+      if (dataComp === 'post') {
+         dispatch(loadData())
+      }
    }
-   return (
-      <button onClick={handleLoadData}>Press to see posts</button>
-   );
-
+      return (
+         <div>
+            <button onClick={handleLoadData}>{text}</button>
+         </div>
+      );
 }
 
 Button = connect()(Button);
