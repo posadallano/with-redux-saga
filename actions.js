@@ -18,9 +18,14 @@ export function loadData () {
 }
 
 export function loadDataSuccess (data) {
+  const wrapperPosts = data.map(info => ({
+    title: info.title, 
+    text: info.body
+  })
+  );
   return {
     type: actionTypes.LOAD_DATA_SUCCESS,
-    data: data
+    data: wrapperPosts
   }
 }
 
@@ -31,8 +36,12 @@ export function loadMoreData () {
 }
 
 export function loadMoreDataSuccess (data) {
+  const wrapperAlbums = data.map(info => ({
+      title: info.title
+    })
+    );
   return {
     type: actionTypes.LOAD_MORE_DATA_SUCCESS,
-    dataalbum: data
+    data: wrapperAlbums
   }
 }

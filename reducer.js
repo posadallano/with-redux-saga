@@ -23,7 +23,7 @@ function reducer (state = exampleInitialState, action) {
       case actionTypes.LOAD_MORE_DATA_SUCCESS:
         return {
           ...state,
-          ...{ albumsData: action.dataalbum }
+          ...{ placeholderData: action.data }
         }  
 
     default:

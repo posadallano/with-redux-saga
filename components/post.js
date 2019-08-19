@@ -1,24 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-let PostItem = ({ articles, albums }) => {
+let PostItem = ({ articles }) => {
     if (articles) {
+        console.log(articles);
         return (
-            articles.map((single, index) => (
-                <article key={index}>
-                    <h1>{single.title}</h1>
-                    <p>{single.body}</p>
-                </article> 
-            )) 
-        )
-    } 
-    if (albums) {
-        return (
-            albums.map((album, index) => (
-                <article key={index}>
-                    <h1>{album.title}</h1>
-                </article> 
-            )) 
+            articles.map((single, index) => {
+                if (single.text) {
+                    return <article key={index}>
+                        <h1>{single.title}</h1>
+                        <p>{single.text}</p>
+                    </article>
+                }
+                else {
+                    return <article key={index}>
+                        <h1>{single.title}</h1>
+                    </article>
+                }
+            })
         )
     }
     return null;
@@ -26,7 +25,6 @@ let PostItem = ({ articles, albums }) => {
 
 const mapStateToProps = (state) => ({
     articles: state.placeholderData,
-    albums: state.albumsData
 })
 
 PostItem = connect(
